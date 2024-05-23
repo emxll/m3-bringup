@@ -424,7 +424,10 @@ if HLT_KERNEL_BOOTSTRAP_AFTER_PRINT:
 
     outk = patch(outk, inject, format_string_adrp)
 
-    # machine_lockdown
+    # loop before machine_lockdown
+    # this probably just needs to happen anywhere after initialize_screen()
+    # use source plus fn_string_dumps to figure out this offset
+
     outk = patch(outk, NO_INTER + LOOP, kernel_bootstrap + (1500 * 4))
 
 open(sys.argv[1]+".patched", 'wb').write(outk)
